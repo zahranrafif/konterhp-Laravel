@@ -53,6 +53,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
+                                <a href="{{ route('facebook.login') }}" title="" class="btn btn-primary">Sign in With Facebook</a>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>

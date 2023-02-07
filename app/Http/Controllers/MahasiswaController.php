@@ -10,17 +10,34 @@ use PDF;
 
 class MahasiswaController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->has('cari')) {
-            $data_mahasiswa = \App\Models\Mahasiswa::where('nama', 'LIKE', '%' . $request->cari . '%')->get();
-        } else {
-            $data_mahasiswa = \App\Models\Mahasiswa::all();
-        }
-        $data_mahasiswa = DB::table('mahasiswa')->paginate(5);
+        // if ($request->has('cari')) {
+        //     $data_mahasiswa = \App\Models\Mahasiswa::where('nama', 'LIKE', '%' . $request->cari . '%')->get();
+        // } else {
+        //     $data_mahasiswa = \App\Models\Mahasiswa::all();
+        // }
+        // $data_mahasiswa = DB::table('mahasiswa')->Paginate(5);
 
+        //menampilkan data terbaru yang ditambahkan
+        $data_mahasiswa = Mahasiswa::latest()->paginate(5);
         return view('mahasiswa.index', ['data_mahasiswa' => $data_mahasiswa]);
     }
+
+    public function cari(Request $request)
+    {
+        //menangkap data pencarian
+        $cari = $request->cari;
+
+        //mengambil data dari table pegawai sesuai pencarian
+        $mahasiswa = DB::table('mahasiswa')
+            ->where('nama', 'like', "%" . $cari . "%")
+            ->paginate();
+
+        //mengirim data pegawai ke view index
+        return view('mahasiswa.index', ['data_mahasiswa' => $mahasiswa]);
+    }
+
 
     public function create(Request $request)
     {
@@ -33,6 +50,7 @@ class MahasiswaController extends Controller
         $data_mahasiswa = \App\Models\Mahasiswa::find($id);
         return view('mahasiswa.edit', ['mahasiswa' => $data_mahasiswa]);
     }
+
 
     public function update(Request $request, $id)
     {
@@ -48,10 +66,11 @@ class MahasiswaController extends Controller
         return redirect('/mahasiswa')->with('Sukses', 'Data berhasil dihapus');
     }
 
+    //PDF
     public function exportPdf()
     {
         $data_mahasiswa = \App\Models\Mahasiswa::all();
         $pdf = PDF::loadView('export.mahasiswapdf', ['mahasiswa' => $data_mahasiswa]);
-        return $pdf->download('mahasiswa.pdf');
+        return $pdf->download('dataservice.pdf');
     }
 }

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Membuat Laporan PDF Dengan DOMPDF Laravel</title>
+    <title>Service</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
@@ -14,16 +14,16 @@
         }
     </style>
     <center>
-        <h5>Membuat Laporan PDF Dengan DOMPDF Laravel</h5>
-        <h1>Data Mahasiswa</h1>
+        <h5>Laporan Pencatatan Service</h5>
+        <h1>Honda Beat & Mio M3</h1>
     </center>
     <table class='table table-bordered'>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>NIM</th>
-                <th>Alamat</th>
+                <th>Motor</th>
+                <th>Tanggal</th>
+                <th>Service</th>
             </tr>
         </thead>
         <tbody>
